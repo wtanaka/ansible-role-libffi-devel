@@ -1,27 +1,22 @@
----
 language: ruby
 rvm:
-  - 2.2
-  - 2.1
-  - 2.0
-  - 1.9.3
-
-# Use the new container infrastructure
+- 2.2
+- 2.1
+- 2.0
+- 1.9.3
 sudo: false
-
 services:
-  - docker
-
+- docker
 script:
-  - >
-    wget -O- bit.ly/ansibletest | env
-    DOCKER_IMAGES="centos:6 centos:7 debian:7 debian:8 ubuntu:14.04
-    ubuntu:16.04 fedora:20 fedora:24"
-    ANSIBLE_VERSIONS="1.4.4 1.6.1 1.8.4 2.0.0.2 2.1.0.0"
-    sh -x
-
+- >
+  wget -O- bit.ly/ansibletest | env
+  DOCKER_IMAGES="centos:6 centos:7 debian:7 debian:8 ubuntu:14.04
+  ubuntu:16.04 fedora:20 fedora:24"
+  ANSIBLE_VERSIONS="1.4.4 1.6.1 1.8.4 2.0.0.2 2.1.0.0"
+  sh -x
 after_failure:
-  - cat role-tester-ansible-master/.kitchen/logs/*.log | grep -v '^I, '
-
+- cat role-tester-ansible-master/.kitchen/logs/*.log | grep -v '^I, '
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  slack:
+    secure: O0Cuk+F3VE8BCQ7eYqlXdDaOMcyyGv4P+Q7eYcu03K+tYnmKQ8R3zO9n8WJzXmtgJTlsCnXRXqn3rA/r2/+mt6Q3w6cGsU1JKHXJrSq+IKYacK8Xm1/6R8/qG3nVjh06plcUaR7CmW6OGKZczk4QHR33Nw26DKFyQ7zl9PTJ8IognpXHt3nyRzVSt2jCwC8oAzzZCH+FWtLmEWTXvV+Irwe2fXiYiCidd0SoiX4vbaz65xAhcNpmNkie2leqvG5SJLQh7SGJ7I5v2euAGRlPOSQw9Kd9CovnuJybyzHvj6yWgdIf1DiyNL7YpFzsaX82dEYPlx6MFGjQd0+1BjHKopypY69OnsylQEgzujvjf1G/wIHKlCRd5Ue+hPKLGtPycwgSK6yOneWgxHspHCj924wn74TNfg5P8rDnXEaHeLwuwranzbUJGglGBTucNxG8of199kloG5nUZpYqQpYKXiM5uWAJwHe1mLPbTeSmk1HuTfTOoy7QKACcXruSvGS1rwHvL+I+YxavRVXGPyAdzQJK9TdDPAQzr1mApMUxd8ihyjGqJsuzALOFTmHqkgGUjN7MbawrCW5lR1/gF/l/2uWo6HcJJ5+4ZhauaEtbd8vrlcAWQ4QaSt71IGCMZCCx7Kb77Hcf4lthYc3feml0B348snZoFaXKw/ZyTc4U9Qk=
